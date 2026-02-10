@@ -1,0 +1,19 @@
+.layoutrid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+}
+
+.sidebarWrapper {
+    /* wrapper styles */
+}
+
+@media (max-width: 1024px) {
+    .layoutrid {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebarWrapper {
+        margin-top: 2rem;
+    }
+}

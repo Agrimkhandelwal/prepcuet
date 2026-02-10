@@ -1,0 +1,19 @@
+.mainGrid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+}
+
+.sidebarWrapper {
+    /* Default sidebar style */
+}
+
+@media (max-width: 1024px) {
+    .mainGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebarWrapper {
+        margin-top: 2rem;
+    }
+}

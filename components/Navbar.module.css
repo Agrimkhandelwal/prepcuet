@@ -1,0 +1,474 @@
+.header {
+    background: var(--background);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    transition: all 0.3s ease;
+}
+
+.header.scrolled {
+    box-shadow: var(--shadow-sm);
+}
+
+.inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+}
+
+.header.scrolled .inner {
+    height: 64px;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+}
+
+.logoIcon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.brand {
+    display: flex;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.brandPrep {
+    color: var(--text-main);
+}
+
+.brandCUET {
+    color: var(--primary);
+}
+
+/* Nav */
+.desktopNav {
+    display: flex;
+    gap: 2.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.navItem {
+    position: relative;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+.navItem:hover {
+    color: var(--text-main);
+}
+
+.hasDropdown>span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--background);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+    min-width: 220px;
+    border-radius: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+    padding: 0.75rem 0;
+    margin-top: 0.5rem;
+}
+
+.hasDropdown:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown a {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    display: block;
+    transition: all 0.2s;
+}
+
+.dropdown a:hover {
+    background: var(--surface);
+    color: var(--text-main);
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.iconBtn {
+    color: var(--text-muted);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.iconBtn:hover {
+    background: var(--surface);
+    color: var(--text-main);
+}
+
+/* Dribbble Style User Profile */
+.userProfile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding-left: 0.5rem;
+}
+
+.profileAvatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--surface);
+}
+
+.avatarImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.userName {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.chevron {
+    color: var(--text-muted);
+    transition: transform 0.2s;
+}
+
+.userProfile:hover .chevron {
+    transform: rotate(180deg);
+}
+
+/* Minimalist Dribbble Dropdown */
+.profileDropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 1.25rem;
+    background: var(--background);
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    width: 280px;
+    border-radius: 16px;
+    overflow: hidden;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.userProfile:hover .profileDropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Top Management Card */
+.topCard {
+    background: var(--surface);
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.topCardInner {
+    background: var(--background);
+    border-radius: 12px;
+    padding: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.dropdownHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.25rem;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: background 0.2s ease;
+}
+
+.dropdownHeader:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme='dark'] .dropdownHeader:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.headerLeft {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.headerLeft .displayName {
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--text-main);
+}
+
+.expandIcon {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0.5;
+    padding: 4px;
+    border-radius: 6px;
+    pointer-events: none;
+    /* Let the header handle clicks */
+}
+
+.expandIcon:hover {
+    background: var(--surface);
+    opacity: 1;
+}
+
+.expandIcon.expanded {
+    transform: rotate(180deg);
+}
+
+.expandableContent {
+    max-height: 500px;
+    opacity: 1;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.itemWithToggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.itemContentMain {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.miniSwitch {
+    width: 32px;
+    height: 18px;
+    background: var(--border);
+    border-radius: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.miniSwitchActive {
+    background: var(--primary);
+}
+
+.miniToggleCircle {
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.miniCircleActive {
+    left: 16px;
+}
+
+.profileDropdownItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 0.75rem;
+    width: 100%;
+    border-radius: 10px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.profileDropdownItem:hover {
+    background: var(--surface);
+    color: var(--text-main);
+}
+
+.itemContent {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.itemIcon {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* Dribbble Specific List Style */
+.secondaryList {
+    padding: 0.5rem;
+}
+
+.secondaryItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.secondaryItem:hover {
+    background: var(--surface);
+    color: var(--text-main);
+}
+
+/* Red Logout */
+.logoutItem {
+    color: #ef4444 !important;
+}
+
+.logoutItem:hover {
+    background: rgba(239, 68, 68, 0.05) !important;
+}
+
+.logoutItem .itemIcon {
+    color: #ef4444 !important;
+}
+
+/* Mobile Toggle */
+.mobileToggle {
+    display: none;
+}
+
+/* Mobile Menu */
+.mobileMenu {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 72px);
+    background: var(--background);
+    z-index: 30;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transform: translateX(100%);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    overflow-y: auto;
+}
+
+.mobileMenuOpen {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.mobileNav {
+    display: flex;
+    flex-direction: column;
+}
+
+.mobileNavItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border);
+}
+
+.mobileProfileSummary {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--surface);
+    border-radius: 16px;
+}
+
+.mobileActionGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+.mobileActionBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.25rem;
+    background: var(--surface);
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .desktopNav {
+        display: none;
+    }
+
+    .mobileToggle {
+        display: block;
+    }
+
+    .userName {
+        display: none;
+    }
+
+    .profileDropdown {
+        display: none;
+        /* Hide on mobile properly */
+    }
+
+    .inner {
+        height: 64px;
+    }
+
+    .mobileMenu {
+        top: 64px;
+        height: calc(100vh - 64px);
+    }
+}

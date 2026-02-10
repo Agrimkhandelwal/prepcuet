@@ -1,0 +1,233 @@
+.newsletterSection {
+    position: relative;
+    padding: 5rem 0;
+    overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+}
+
+.grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+.textSide {
+    flex: 1;
+}
+
+.iconBadge {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.features {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.features li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+}
+
+.features li svg {
+    color: #fde68a;
+}
+
+.formSide {
+    flex: 0 0 400px;
+}
+
+.form {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.form h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.inputGroup {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.inputIcon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+}
+
+.input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #b91c1c;
+}
+
+.submitBtn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.submitBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(30, 41, 59, 0.3);
+}
+
+.submitBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.privacyNote {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-top: 1rem;
+}
+
+.successCard {
+    background: white;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.successIcon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 0 auto 1.5rem;
+}
+
+.successCard h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.successCard p {
+    color: #64748b;
+}
+
+@media (max-width: 1024px) {
+    .content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .features {
+        justify-content: center;
+    }
+
+    .formSide {
+        flex: none;
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 640px) {
+    .title {
+        font-size: 1.75rem;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+}

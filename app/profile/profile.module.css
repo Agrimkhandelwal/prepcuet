@@ -1,0 +1,205 @@
+.container {
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+    min-height: 100vh;
+    background: var(--background);
+}
+
+.profileHeader {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme='dark'] .profileHeader {
+    background: var(--surface);
+}
+
+.avatarWrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.avatarImage {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 4px solid var(--background);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profileInfo h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+}
+
+.userRole {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    text-transform: capitalize;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.statCard {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme='dark'] .statCard {
+    background: var(--surface);
+}
+
+.statCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.statIcon {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    background: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.statInfo .statValue {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    display: block;
+}
+
+.statInfo .statLabel {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.sectionTitle {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 1.5rem;
+}
+
+.contentRow {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+}
+
+.activityCard,
+.progressCard {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2rem;
+}
+
+[data-theme='dark'] .activityCard,
+[data-theme='dark'] .progressCard {
+    background: var(--surface);
+}
+
+.activityList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.activityItem {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.activityItem:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.activityDot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--primary);
+    margin-top: 0.4rem;
+    flex-shrink: 0;
+}
+
+.activityContent h4 {
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+}
+
+.activityTime {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.editBtn {
+    margin-left: auto;
+    background: var(--primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.editBtn:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 992px) {
+    .contentRow {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .profileHeader {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1rem;
+    }
+
+    .editBtn {
+        margin: 1.5rem 0 0 0;
+        width: 100%;
+        text-align: center;
+    }
+}

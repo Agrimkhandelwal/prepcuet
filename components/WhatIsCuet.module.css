@@ -1,0 +1,339 @@
+.section {
+    padding: 8rem 0;
+    position: relative;
+    background: radial-gradient(circle at top left, #1e293b 0%, #0f172a 100%);
+    overflow: hidden;
+    color: white;
+}
+
+/* Animated Background Blobs */
+.blob1,
+.blob2 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    z-index: 0;
+    animation: float 10s infinite ease-in-out alternate;
+}
+
+.blob1 {
+    top: -10%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: #7c3aed;
+    /* Violet */
+    animation-delay: 0s;
+}
+
+.blob2 {
+    bottom: -10%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: #db2777;
+    /* Pink/Red */
+    animation-delay: -5s;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(30px, 50px) scale(1.1);
+    }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.splitLayout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+/* Entrance Animation Keyframes */
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Left Panel - Visual Focus with Animation */
+.visualPanel {
+    position: relative;
+    animation: slideUpFade 0.8s ease-out forwards;
+}
+
+.bigText {
+    font-size: 8rem;
+    font-weight: 900;
+    line-height: 0.8;
+    background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0.1;
+    position: absolute;
+    top: -4rem;
+    left: -2rem;
+    z-index: -1;
+    pointer-events: none;
+    font-family: var(--font-merriweather), serif;
+}
+
+/* Shimmering Headline Animation */
+@keyframes shimmer {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.headline {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    /* Shimmer Effect Gradient */
+    background: linear-gradient(90deg,
+            #ffffff,
+            #cbd5e1,
+            #e2e8f0,
+            #cbd5e1,
+            #ffffff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 5s linear infinite;
+}
+
+.subheadline {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    border-left: 3px solid #db2777;
+    padding-left: 1.5rem;
+}
+
+/* Right Panel - Glass Card with Entrance Animation */
+.contentCard {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    /* Delayed entrance for right panel */
+    opacity: 0;
+    animation: slideUpFade 0.8s ease-out 0.2s forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Enhanced Hover Spotlight Effect */
+.contentCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 60px -15px rgba(124, 58, 237, 0.15);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.contentCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent);
+    transition: 0.6s;
+    z-index: 1;
+}
+
+.contentCard:hover::before {
+    left: 100%;
+}
+
+.textBlock {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.highlight {
+    color: #f472b6;
+    /* Pink-400 */
+    font-weight: 600;
+}
+
+.ctaWrapper {
+    margin-top: 2.5rem;
+}
+
+.ctaButton {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(90deg, #7c3aed, #db2777);
+    color: white;
+    font-weight: 700;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.9rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 20px -5px rgba(219, 39, 119, 0.4);
+    overflow: hidden;
+    z-index: 2;
+}
+
+.ctaButton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 30px -10px rgba(219, 39, 119, 0.6);
+}
+
+/* Button Shine Effect */
+.ctaButton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+    transition: 0.5s;
+    transform: skewX(-20deg);
+}
+
+.ctaButton:hover::after {
+    left: 100%;
+}
+
+.ctaButton span {
+    position: relative;
+    z-index: 1;
+}
+
+.icon {
+    transition: transform 0.3s ease;
+}
+
+.ctaButton:hover .icon {
+    transform: translateX(4px);
+}
+
+@media (max-width: 900px) {
+    .section {
+        padding: 6rem 0;
+    }
+
+    .splitLayout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .headline {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+
+    .subheadline {
+        text-align: center;
+        border-left: none;
+        border-bottom: 3px solid #db2777;
+        padding-left: 0;
+        padding-bottom: 1rem;
+        display: inline-block;
+    }
+
+    .visualPanel {
+        text-align: center;
+    }
+
+    .bigText {
+        display: none;
+    }
+}
+
+/* Mobile Specific Optimizations */
+@media (max-width: 600px) {
+    .section {
+        padding: 4rem 1rem;
+        /* Reduced padding further */
+    }
+
+    .splitLayout {
+        gap: 2rem;
+    }
+
+    .headline {
+        font-size: 2rem;
+        /* Smaller headline */
+        margin-bottom: 1rem;
+    }
+
+    .subheadline {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .contentCard {
+        padding: 1.5rem;
+        /* Maximize space */
+        border-radius: 16px;
+    }
+
+    .textBlock {
+        font-size: 0.95rem;
+        /* Readable but compact */
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .ctaWrapper {
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    .ctaButton {
+        width: 100%;
+        justify-content: center;
+        padding: 0.9rem 1.5rem;
+    }
+}

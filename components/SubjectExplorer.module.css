@@ -1,0 +1,139 @@
+.subjectExplorer {
+    padding: 4rem 0;
+    background: var(--surface);
+}
+
+.header {
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.heading {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+}
+
+.subheading {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: var(--primary);
+}
+
+.cardHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.iconWrapper {
+    width: 48px;
+    height: 48px;
+    background: var(--surface-hover);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+}
+
+.badge {
+    background: var(--primary);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 50px;
+}
+
+.subjectTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--secondary);
+    margin-bottom: 0.25rem;
+}
+
+.articleCount {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.articlesList {
+    margin-bottom: 1.5rem;
+    flex: 1;
+}
+
+.articleLabel {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    display: block;
+    letter-spacing: 0.05em;
+}
+
+.articleItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.bullet {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    margin-top: 7px;
+    flex-shrink: 0;
+}
+
+.viewBtn {
+    width: 100%;
+    padding: 0.75rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--primary);
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.viewBtn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Dark Mode Overrides for Specific text if needed, though vars handle most */

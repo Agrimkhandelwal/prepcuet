@@ -1,66 +1,49 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import HeroSlider from '@/components/HeroSlider';
+import WhatIsCuet from '@/components/WhatIsCuet';
+import QuickLinks from '@/components/QuickLinks';
+import ContentFeed from '@/components/ContentFeed';
+import Sidebar from '@/components/Sidebar';
+import SubjectExplorer from '@/components/SubjectExplorer';
+import StatsCounter from '@/components/StatsCounter';
+import Testimonials from '@/components/Testimonials';
+import WhyChooseUs from '@/components/WhyChooseUs';
+import Newsletter from '@/components/Newsletter';
+import FAQ from '@/components/FAQ';
+import styles from './Home.module.css';
+
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'PrepCUET - #1 Platform for CUET & Subject Preparation',
+  description: 'Start your journey to your dream university with PrepCUET. Access thousands of practice questions, mock tests, and subject-wise study material designed for CUET success.',
+  alternates: {
+    canonical: 'https://prepcuet.com',
+  },
+};
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <HeroSlider />
+      <StatsCounter />
+      <WhatIsCuet />
+      <QuickLinks />
+      <WhyChooseUs />
+      {/* LATEST UPDATES SECTION - HIDDEN (uncomment to show again) */}
+      {/* <div className="container" style={{ marginTop: '3rem', marginBottom: '3rem' }}>
+        <div className={styles.mainGrid}>
+          <main>
+            <ContentFeed />
+          </main>
+          <div className={styles.sidebarWrapper}>
+            <Sidebar />
+          </div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div> */}
+      <SubjectExplorer />
+      <Testimonials />
+      <FAQ />
+      <Newsletter />
+    </>
   );
 }

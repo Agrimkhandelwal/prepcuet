@@ -1,0 +1,57 @@
+.bar {
+    background-color: var(--secondary);
+    color: var(--secondary-foreground);
+    padding: 0.5rem 0;
+    font-size: 0.875rem;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    z-index: 50;
+}
+
+.content {
+    display: inline-flex;
+    align-items: center;
+    animation: scroll 20s linear infinite;
+    padding-left: 100%;
+    /* Start from right */
+}
+
+.tag {
+    background-color: var(--accent);
+    color: var(--secondary);
+    font-weight: 700;
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+    margin-right: 0.75rem;
+    font-size: 0.75rem;
+}
+
+.urgent {
+    background-color: #fef2f2;
+    color: #991b1b;
+}
+
+.text {
+    font-weight: 500;
+}
+
+.separator {
+    margin: 0 1rem;
+    opacity: 0.5;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Pause on hover */
+.bar:hover .content {
+    animation-play-state: paused;
+}

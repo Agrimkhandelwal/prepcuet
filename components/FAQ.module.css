@@ -1,0 +1,158 @@
+.faqSection {
+    padding: 5rem 0;
+    background: linear-gradient(to bottom, white, #f8fafc);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+    color: #4338ca;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+}
+
+.subtitle {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.faqList {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.faqItem {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faqItem:hover {
+    border-color: #cbd5e1;
+}
+
+.faqItem.open {
+    border-color: #b91c1c;
+    box-shadow: 0 10px 30px rgba(185, 28, 28, 0.1);
+}
+
+.faqQuestion {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.questionNumber {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #b91c1c;
+    flex-shrink: 0;
+}
+
+.questionText {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.chevron {
+    color: #64748b;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.open .chevron {
+    transform: rotate(180deg);
+    color: #b91c1c;
+}
+
+.faqAnswer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.open .faqAnswer {
+    max-height: 300px;
+}
+
+.faqAnswer p {
+    padding: 0 1.5rem 1.5rem 3.5rem;
+    color: #64748b;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+.moreQuestions {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: #f1f5f9;
+    border-radius: 16px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.moreQuestions p {
+    color: #64748b;
+    margin-bottom: 0.5rem;
+}
+
+.contactLink {
+    color: #b91c1c;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.contactLink:hover {
+    color: #991b1b;
+}
+
+@media (max-width: 640px) {
+    .title {
+        font-size: 1.75rem;
+    }
+
+    .faqQuestion {
+        padding: 1rem;
+    }
+
+    .questionText {
+        font-size: 0.95rem;
+    }
+
+    .faqAnswer p {
+        padding-left: 2.5rem;
+    }
+}

@@ -1,0 +1,139 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.widget {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.widgetTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--surface);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Course Items */
+.courseItem {
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.courseItem:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.courseHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.courseName {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--secondary);
+    line-height: 1.4;
+}
+
+.modeBadge {
+    font-size: 0.7rem;
+    background: var(--surface);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    margin-left: 0.5rem;
+}
+
+.courseMeta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+
+.courseLink {
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+}
+
+.courseLink:hover {
+    text-decoration: underline;
+}
+
+/* Notifications */
+.notifyList {
+    list-style: none;
+}
+
+.notifyItem {
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    position: relative;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.notifyItem::before {
+    content: "•";
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.notifyItem a:hover {
+    color: var(--primary);
+}
+
+/* Ad Widget */
+.adWidget {
+    background: linear-gradient(135deg, var(--secondary) 0%, #334155 100%);
+    color: white;
+    text-align: center;
+}
+
+.adWidget h4 {
+    color: white;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.adWidget p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+}
+
+.adBtn {
+    background: var(--accent);
+    color: var(--secondary);
+    font-weight: 700;
+    padding: 0.6rem 1.25rem;
+    border-radius: 50px;
+    width: 100%;
+}
+
+.adBtn:hover {
+    opacity: 0.9;
+}

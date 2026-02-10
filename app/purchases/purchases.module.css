@@ -1,0 +1,135 @@
+.container {
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+    min-height: 100vh;
+    background: var(--background);
+}
+
+.purchaseWrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.purchaseList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.purchaseCard {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    transition: transform 0.2s ease;
+}
+
+[data-theme='dark'] .purchaseCard {
+    background: var(--surface);
+}
+
+.purchaseCard:hover {
+    transform: translateX(10px);
+    border-color: var(--primary);
+}
+
+.itemImage {
+    width: 120px;
+    height: 80px;
+    background: var(--primary-light);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.itemInfo {
+    flex-grow: 1;
+}
+
+.itemInfo h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.itemMeta {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.statusBadge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.statusActive {
+    background: #ecfdf5;
+    color: #10b981;
+}
+
+.actionBtn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.actionBtn:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.emptyState {
+    text-align: center;
+    padding: 5rem 0;
+}
+
+.emptyState h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+}
+
+.emptyState p {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 640px) {
+    .purchaseCard {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .itemMeta {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .actionBtn {
+        width: 100%;
+        justify-content: center;
+    }
+}
