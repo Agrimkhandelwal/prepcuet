@@ -84,6 +84,28 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${merriweather.variable}`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'PrepCUET',
+              url: 'https://prepcuet.com',
+              logo: 'https://prepcuet.com/logo.png',
+              sameAs: [
+                'https://facebook.com/prepcuet',
+                'https://twitter.com/prepcuet',
+                'https://instagram.com/prepcuet',
+              ],
+              contactPoint: {
+                '@type': 'ContactPoint',
+                telephone: '+91-1234567890',
+                contactType: 'customer service',
+              },
+            }),
+          }}
+        />
         <Providers>
           <div className="min-h-screen flex flex-col">
             <AnnouncementBar />
