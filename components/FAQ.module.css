@@ -1,6 +1,6 @@
 .faqSection {
     padding: 5rem 0;
-    background: linear-gradient(to bottom, white, #f8fafc);
+    background: var(--background);
 }
 
 .header {
@@ -24,12 +24,12 @@
 .title {
     font-size: 2.5rem;
     font-weight: 800;
-    color: #1e293b;
+    color: var(--text-main);
     margin-bottom: 0.75rem;
 }
 
 .subtitle {
-    color: #64748b;
+    color: var(--text-muted);
     font-size: 1.1rem;
 }
 
@@ -42,20 +42,20 @@
 }
 
 .faqItem {
-    background: white;
+    background: var(--card-bg);
     border-radius: 16px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border);
     overflow: hidden;
     transition: all 0.3s ease;
 }
 
 .faqItem:hover {
-    border-color: #cbd5e1;
+    border-color: var(--text-muted);
 }
 
 .faqItem.open {
     border-color: #b91c1c;
-    box-shadow: 0 10px 30px rgba(185, 28, 28, 0.1);
+    box-shadow: var(--shadow);
 }
 
 .faqQuestion {
@@ -81,11 +81,11 @@
     flex: 1;
     font-size: 1rem;
     font-weight: 600;
-    color: #1e293b;
+    color: var(--text-main);
 }
 
 .chevron {
-    color: #64748b;
+    color: var(--text-muted);
     transition: transform 0.3s ease;
     flex-shrink: 0;
 }
@@ -107,7 +107,7 @@
 
 .faqAnswer p {
     padding: 0 1.5rem 1.5rem 3.5rem;
-    color: #64748b;
+    color: var(--text-muted);
     line-height: 1.7;
     font-size: 0.95rem;
 }
@@ -116,7 +116,7 @@
     text-align: center;
     margin-top: 3rem;
     padding: 2rem;
-    background: #f1f5f9;
+    background: var(--surface);
     border-radius: 16px;
     max-width: 500px;
     margin-left: auto;
@@ -124,7 +124,7 @@
 }
 
 .moreQuestions p {
-    color: #64748b;
+    color: var(--text-muted);
     margin-bottom: 0.5rem;
 }
 

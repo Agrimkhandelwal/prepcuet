@@ -1,6 +1,6 @@
 .testimonialSection {
     padding: 5rem 0;
-    background: linear-gradient(to bottom, #f8fafc, white);
+    background: var(--background);
 }
 
 .header {
@@ -22,12 +22,12 @@
 .title {
     font-size: 2.5rem;
     font-weight: 800;
-    color: #1e293b;
+    color: var(--text-main);
     margin-bottom: 0.75rem;
 }
 
 .subtitle {
-    color: #64748b;
+    color: var(--text-muted);
     font-size: 1.1rem;
     max-width: 500px;
     margin: 0 auto;
@@ -46,9 +46,9 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 1px solid #e2e8f0;
-    background: white;
-    color: #64748b;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text-muted);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,19 +58,19 @@
 }
 
 .navBtn:hover {
-    background: #b91c1c;
+    background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
     color: white;
     border-color: #b91c1c;
 }
 
 .testimonialCard {
-    background: white;
+    background: var(--card-bg);
     border-radius: 24px;
     padding: 3rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow);
     text-align: center;
     position: relative;
-    border: 1px solid #f1f5f9;
+    border: 1px solid var(--border);
 }
 
 .quoteIcon {
@@ -91,7 +91,7 @@
 .testimonialText {
     font-size: 1.15rem;
     line-height: 1.8;
-    color: #374151;
+    color: var(--text-main);
     margin-bottom: 1.5rem;
     font-style: italic;
 }
@@ -124,13 +124,13 @@
 .authorDetails h4 {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #1e293b;
+    color: var(--text-main);
     margin-bottom: 0.125rem;
 }
 
 .authorDetails p {
     font-size: 0.9rem;
-    color: #64748b;
+    color: var(--text-muted);
 }
 
 .selectionBadge {
@@ -154,13 +154,13 @@
     height: 10px;
     border-radius: 50%;
     border: none;
-    background: #e2e8f0;
+    background: var(--border);
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .dotActive {
-    background: #b91c1c;
+    background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
     width: 30px;
     border-radius: 5px;
 }
@@ -189,5 +189,48 @@
 
     .authorInfo {
         flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonialSection {
+        padding: 3rem 0;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .testimonialCard {
+        padding: 1.5rem 1rem;
+    }
+
+    .quoteIcon {
+        width: 40px;
+        height: 40px;
+        top: -15px;
+    }
+
+    .testimonialText {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .avatar {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .authorDetails h4 {
+        font-size: 1rem;
+    }
+
+    .authorDetails p {
+        font-size: 0.85rem;
     }
 }

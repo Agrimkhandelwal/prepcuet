@@ -24,28 +24,35 @@
 [data-theme='dark'] {
   --primary: #ef4444;
   --primary-hover: #dc2626;
+  --primary-light: rgba(239, 68, 68, 0.3);
+  /* New var for glows */
+
   --secondary: #f8fafc;
-  /* Light text for headings in Dark Mode */
-  --secondary-foreground: #1e293b;
-  /* Inverting for semantics if needed, but Footer might need specific overrides */
+  --secondary-foreground: #0f172a;
 
-  /* Footer special case: Footer uses bg-secondary. In dark mode, we might want to keep footer dark. 
-     So we might need specific vars or handle it. 
-     Let's keep --secondary as the "Brand Dark Color" and define --heading-color separately?
-     Or just remap standard background/text.
-  */
+  /* Richer Dark Theme */
+  --background: #020617;
+  /* Slate 950 - Deeper than 900 for more contrast */
+  --surface: #0f172a;
+  /* Slate 900 */
+  --surface-hover: #1e293b;
+  /* Slate 800 */
 
-  --background: #0f172a;
-  --surface: #1e293b;
-  --surface-hover: #334155;
-  --text-main: #f1f5f9;
+  --card-bg: #0f172a;
+  /* Slate 900 - Matches surface */
+
+  --text-main: #f8fafc;
+  /* Slate 50 */
   --text-muted: #94a3b8;
-  --border: #334155;
+  /* Slate 400 */
 
-  --card-bg: #1e293b;
+  --border: #1e293b;
+  /* Slate 800 */
 
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  /* Softer shadows for dark mode */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -116,10 +123,58 @@ button {
   padding: 0 1rem;
 }
 
+@media (min-width: 640px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
 .serif {
   font-family: var(--font-merriweather), serif;
 }
 
 .text-primary {
   color: var(--primary);
+}
+
+/* Responsive Typography */
+@media (max-width: 480px) {
+  h1 {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+  }
+}
+
+/* Mobile-friendly utilities */
+.hide-mobile {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hide-mobile {
+    display: initial;
+  }
+}
+
+.show-mobile {
+  display: initial;
+}
+
+@media (min-width: 768px) {
+  .show-mobile {
+    display: none;
+  }
 }

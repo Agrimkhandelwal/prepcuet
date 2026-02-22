@@ -14,7 +14,9 @@ export default function Footer() {
                 <div className={styles.grid}>
                     {/* About Column */}
                     <div className={styles.col}>
-                        <h3 className={styles.heading}>PrepCUET</h3>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
+                            <img src="/logo-full.png" alt="PrepCUET" style={{ height: 44, width: 'auto', objectFit: 'contain' }} />
+                        </div>
                         <p className={styles.text}>
                             {t.footer.aboutText}
                         </p>

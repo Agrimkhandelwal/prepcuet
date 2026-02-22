@@ -1,0 +1,649 @@
+/* Global Page Layout */
+.testSeriesPage {
+    min-height: 100vh;
+    background: var(--background);
+    /* Subtle background pattern for the whole page */
+    background-image:
+        radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.03) 0%, transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.03) 0%, transparent 25%);
+}
+
+/* 
+   ==========================================================================
+   Hero Section - Mesh Gradient & 3D Feel
+   ========================================================================== 
+*/
+.hero {
+    position: relative;
+    padding: 6rem 0 8rem;
+    overflow: hidden;
+    /* Deep luxury dark background as base */
+    background: #020617;
+}
+
+/* Dynamic Mesh Gradient Background */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background:
+        radial-gradient(circle at 50% 50%, rgba(79, 70, 229, 0.15), transparent 50%),
+        radial-gradient(circle at 0% 0%, rgba(236, 72, 153, 0.1), transparent 40%),
+        radial-gradient(circle at 100% 100%, rgba(59, 130, 246, 0.1), transparent 40%);
+    animation: rotateMesh 20s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes rotateMesh {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.heroContent {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.heroText h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    color: white;
+    letter-spacing: -0.02em;
+}
+
+.heroText h1 span {
+    /* Rich Gradient Text */
+    background: linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #f472b6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+}
+
+/* Add a subtle glow behind the text */
+.heroText h1 span::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background: inherit;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: blur(20px);
+    opacity: 0.4;
+}
+
+.heroText p {
+    color: #cbd5e1;
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    max-width: 90%;
+    font-weight: 400;
+}
+
+/* Glass Stat Cards */
+.heroStats {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.statItem {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1rem 1.75rem;
+    border-radius: 16px;
+    text-align: center;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.statItem:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-5px);
+    border-color: rgba(129, 140, 248, 0.3);
+}
+
+.statNumber {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: white;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.statLabel {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+/* 3D Floating Hero Card */
+.heroImage {
+    display: flex;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+.heroCard {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 2.5rem;
+    text-align: center;
+    width: 320px;
+    box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    animation: floatCard 6s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Inner glow for card */
+.heroCard::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+@keyframes floatCard {
+
+    0%,
+    100% {
+        transform: translateY(0) rotateX(2deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotateX(-2deg);
+    }
+}
+
+.heroCardIcon {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, #4f46e5 0%, #ec4899 100%);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 10px 30px -5px rgba(79, 70, 229, 0.4);
+    position: relative;
+}
+
+.heroCardIcon svg {
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.heroCardTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.heroCardDesc {
+    color: #cbd5e1;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* 
+   ==========================================================================
+   Tabs Interface
+   ========================================================================== 
+*/
+.tabsSection {
+    margin-top: -3rem;
+    /* Overlap hero */
+    position: relative;
+    z-index: 10;
+    padding-bottom: 4rem;
+}
+
+.tabsContainer {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    padding: 0.5rem;
+    border-radius: 16px;
+    display: inline-flex;
+    gap: 0.25rem;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 2.5rem;
+}
+
+[data-theme='dark'] .tabsContainer {
+    background: rgba(15, 23, 42, 0.7);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.tab {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background: transparent;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.tab:hover {
+    color: var(--text-main);
+    background: var(--surface);
+}
+
+.tabActive {
+    background: var(--text-main) !important;
+    color: var(--background) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] .tabActive {
+    background: white !important;
+    /* Invert for contrast */
+    color: black !important;
+}
+
+.tabBadge {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 0.1rem 0.5rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.tabActive .tabBadge {
+    background: rgba(0, 0, 0, 0.1);
+    /* Darker on light bg */
+    color: inherit;
+}
+
+/* 
+   ==========================================================================
+   Test Cards - Glassmorphic & Interactive
+   ========================================================================== 
+*/
+.testGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.testCard {
+    background: var(--card-bg);
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* For glass effect on top of page pattern */
+    backdrop-filter: blur(5px);
+}
+
+/* Hover Lift & Glow */
+.testCard:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow:
+        0 20px 40px -5px rgba(0, 0, 0, 0.1),
+        0 0 0 1px var(--primary-light);
+    /* Halo effect */
+    border-color: var(--primary);
+    z-index: 2;
+}
+
+/* Holographic sheen on hover */
+.testCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right,
+            transparent,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent);
+    transform: skewX(-25deg);
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.testCard:hover::before {
+    left: 150%;
+    transition: 0.7s;
+}
+
+.testCardHeader {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: linear-gradient(to bottom, var(--surface), transparent);
+}
+
+.testInfo h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.testMeta {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.testMetaItem {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    background: var(--surface);
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    /* Placeholder */
+}
+
+/* Badges */
+.testBadge {
+    padding: 0.35rem 0.85rem;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.badgeLive {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+    animation: livePulse 2s infinite;
+}
+
+@keyframes livePulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+}
+
+.badgeUpcoming {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+}
+
+.badgeCompleted {
+    background: var(--surface);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+}
+
+.badgeFree {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.testCardBody {
+    padding: 1.5rem;
+}
+
+.testSubjects {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.subjectTag {
+    background: var(--surface);
+    color: var(--text-main);
+    padding: 0.35rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+}
+
+.subjectTag:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.testDetails {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--surface);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+}
+
+.detailItem {
+    text-align: center;
+}
+
+.detailValue {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--text-main);
+    display: block;
+    margin-bottom: 0.1rem;
+}
+
+.detailLabel {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.testCardFooter {
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--surface);
+}
+
+.testDate {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Primary Action Button - Gradient & Shadow */
+.startBtn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.75rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(var(--primary-rgb), 0.3);
+    /* If RGB var exists, else default */
+}
+
+/* Shine effect on button */
+.startBtn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+    transform: skewX(-20deg);
+}
+
+.startBtn:hover::after {
+    left: 150%;
+}
+
+.startBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+}
+
+.startBtn:active {
+    transform: translateY(0);
+}
+
+.disabledBtn {
+    background: var(--surface-hover);
+    color: var(--text-muted);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.disabledBtn:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Empty State */
+.emptyState {
+    text-align: center;
+    padding: 6rem 2rem;
+    color: var(--text-muted);
+    background: var(--surface);
+    border-radius: 24px;
+    border: 2px dashed var(--border);
+}
+
+/* 
+   ==========================================================================
+   Responsive
+   ========================================================================== 
+*/
+@media (max-width: 1024px) {
+    .heroContent {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 3rem;
+    }
+
+    .heroText h1 {
+        font-size: 3rem;
+    }
+
+    .heroText p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .heroStats {
+        justify-content: center;
+    }
+
+    .heroImage {
+        margin-top: 1rem;
+    }
+
+    .tabsSection {
+        margin-top: 0;
+        text-align: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero {
+        padding: 4rem 0 3rem;
+    }
+
+    .heroText h1 {
+        font-size: 2.25rem;
+    }
+
+    .heroCard {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .tabsContainer {
+        display: flex;
+        overflow-x: auto;
+        width: 100%;
+        border-radius: 8px;
+    }
+
+    .tab {
+        flex: 1;
+        white-space: nowrap;
+        padding: 0.6rem 1rem;
+        justify-content: center;
+    }
+
+    .testGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .testMeta {
+        margin-top: 0.5rem;
+    }
+}

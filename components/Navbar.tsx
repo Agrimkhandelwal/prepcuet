@@ -9,7 +9,7 @@ import {
     Command, BookOpen, MessageSquare, Users
 } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
-import LanguageSwitcher from './LanguageSwitcher';
+
 import { useLanguage } from '@/app/context/LanguageContext';
 import styles from './Navbar.module.css';
 import { auth, db } from '@/lib/firebase';
@@ -83,7 +83,7 @@ export default function Navbar() {
                 <div className={styles.inner}>
                     {/* Logo */}
                     <Link href="/" className={styles.logo}>
-                        <Image src="/logo.png?v=2" alt="PrepCUET" width={40} height={40} className={styles.logoIcon} priority unoptimized />
+                        <Image src="/logo.png" alt="PrepCUET" width={44} height={44} className={styles.logoIcon} priority unoptimized />
                         <span className={styles.brand}>
                             <span className={styles.brandPrep}>Prep</span>
                             <span className={styles.brandCUET}>CUET</span>
@@ -97,10 +97,14 @@ export default function Navbar() {
                             <div className={styles.dropdown}>
                                 <Link href="/courses/online">{t.navbar.onlineBatches}</Link>
                                 <Link href="/courses/offline">{t.navbar.offlineClassroom}</Link>
-                                <Link href="/test-series">{t.navbar.testSeries}</Link>
                             </div>
                         </div>
+                        <Link href="/test-series" className={`${styles.navItem} ${styles.highlightLink}`}>
+                            {t.navbar.testSeries}
+                            <span className={styles.newBadge}>NEW</span>
+                        </Link>
                         <Link href="/resources" className={styles.navItem}>{t.navbar.resources}</Link>
+                        <Link href="/pricing" className={styles.navItem}>Pricing</Link>
                         <Link href="/toppers" className={styles.navItem}>{t.navbar.toppers}</Link>
                     </nav>
 
@@ -116,7 +120,7 @@ export default function Navbar() {
                             </button>
                         </div>
 
-                        <LanguageSwitcher />
+
 
                         {user ? (
                             <div className={styles.userProfile}>
@@ -262,8 +266,12 @@ export default function Navbar() {
                     <Link href="/courses/offline" className={styles.mobileNavItem} onClick={() => setIsMobileMenuOpen(false)}>
                         {t.navbar.offlineClassroom} <ChevronRight size={18} />
                     </Link>
-                    <Link href="/test-series" className={styles.mobileNavItem} onClick={() => setIsMobileMenuOpen(false)}>
-                        {t.navbar.testSeries} <ChevronRight size={18} />
+                    <Link href="/test-series" className={`${styles.mobileNavItem} ${styles.mobileHighlight}`} onClick={() => setIsMobileMenuOpen(false)}>
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            {t.navbar.testSeries}
+                            <span className={styles.newBadge}>NEW</span>
+                        </span>
+                        <ChevronRight size={18} />
                     </Link>
                     <Link href="/resources" className={styles.mobileNavItem} onClick={() => setIsMobileMenuOpen(false)}>
                         {t.navbar.resources} <ChevronRight size={18} />
@@ -282,10 +290,16 @@ export default function Navbar() {
                             <span>Logout</span>
                         </button>
                     ) : (
-                        <Link href="/login" className={styles.mobileActionBtn} onClick={() => setIsMobileMenuOpen(false)}>
-                            <User size={24} />
-                            <span>Login</span>
-                        </Link>
+                        <>
+                            <Link href="/login" className={styles.mobileActionBtn} onClick={() => setIsMobileMenuOpen(false)}>
+                                <User size={24} />
+                                <span>Login</span>
+                            </Link>
+                            <Link href="/signup" className={styles.mobileActionBtn} onClick={() => setIsMobileMenuOpen(false)} style={{ gridColumn: '1 / -1' }}>
+                                <UserPlus size={24} />
+                                <span>Sign Up</span>
+                            </Link>
+                        </>
                     )}
                 </div>
             </div>

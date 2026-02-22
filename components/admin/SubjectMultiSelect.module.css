@@ -1,0 +1,180 @@
+.container {
+    margin-bottom: 1.5rem;
+}
+
+.label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+    font-size: 0.9375rem;
+}
+
+.selectedTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    min-height: 50px;
+    margin-bottom: 0.75rem;
+    transition: all 0.2s;
+}
+
+.placeholder {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+    color: white;
+    padding: 0.375rem 0.625rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.removeBtn {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.removeBtn:hover {
+    opacity: 1;
+}
+
+.dropdownWrapper {
+    position: relative;
+}
+
+.dropdownBtn {
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    padding: 0.625rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9375rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdownBtn:hover {
+    border-color: var(--text-muted);
+    background: var(--surface);
+    color: var(--text-main);
+}
+
+.dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: var(--shadow-lg);
+    z-index: 10;
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+    transition: border-color 0.2s;
+    background: var(--surface);
+}
+
+.searchContainer:focus-within {
+    border-color: var(--primary);
+}
+
+.searchInput {
+    border: none;
+    outline: none;
+    font-size: 0.9375rem;
+    width: 100%;
+    color: var(--text-main);
+    background: transparent;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.actionBtn {
+    flex: 1;
+    padding: 0.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.actionBtn:hover {
+    background: var(--surface-hover);
+    color: var(--text-main);
+}
+
+.subjectList {
+    overflow-y: auto;
+    max-height: 250px;
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    padding: 0.625rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-radius: 6px;
+    user-select: none;
+}
+
+.checkboxLabel:hover {
+    background: var(--surface);
+}
+
+.checkboxLabel input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 0.75rem;
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+.checkboxLabel span {
+    color: var(--text-main);
+    font-size: 0.9375rem;
+}
