@@ -15,7 +15,7 @@ const merriweather = Merriweather({
 })
 
 export const metadata: Metadata = {
-    metadataBase: new URL('https://prepcuet.com'),
+    metadataBase: new URL('https://www.preepcuet.in'),
     title: {
         default: 'PrepCUET | Best CUET & Board Exam Preparation Platform',
         template: '%s | PrepCUET'

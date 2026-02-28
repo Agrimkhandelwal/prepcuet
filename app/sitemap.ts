@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { SUBJECTS_DATA } from '@/lib/data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://prepcuet.com'; // Replace with your actual domain
+    const baseUrl = 'https://www.preepcuet.in'; // Replace with your actual domain
 
     // Static routes
     const staticRoutes = [
