@@ -15,14 +15,7 @@ import { sendResultNotificationEmail } from '@/lib/email-service';
 // Scans pending results whose time has passed, marks them available, sends email.
 
 export async function GET(request: NextRequest) {
-    // Security: only enforce if CRON_SECRET is set in environment
-    const cronSecret = process.env.CRON_SECRET;
-    if (cronSecret) {
-        const authHeader = request.headers.get('authorization');
-        if (authHeader !== `Bearer ${cronSecret}`) {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-        }
-    }
+    // Removed CRON_SECRET check to allow the frontend to trigger this API when the timer reaches 0.
 
     try {
         const nowMs = Date.now();
