@@ -147,3 +147,16 @@ export interface EmailQueue {
         resultId?: string;
     };
 }
+
+// Previous Year Papers Schema
+export interface PastPaper {
+    id: string;             // Firestore Document ID
+    title: string;          // e.g. "CUET UG 2024 - Mathematics"
+    year: number;           // e.g. 2024
+    subject: string;        // Must match one of SUBJECTS from constants/subjects
+    duration: string;       // e.g. "60 Mins"
+    questions: number;      // e.g. 50
+    pdfUrl: string;         // Cloudinary or Firebase Storage URL
+    createdAt: Timestamp;
+    updatedAt: Timestamp;
+}

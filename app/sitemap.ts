@@ -10,7 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/about',
         '/contact',
         '/courses/online',
-        '/courses/offline',
         '/test-series',
         '/resources',
         '/toppers',

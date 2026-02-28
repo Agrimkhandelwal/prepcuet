@@ -73,7 +73,7 @@ export default function ContentReadPage() {
 
     return (
         <div className={styles.pageContainer}>
-            <div className={styles.hero}>
+            <div className={`${styles.hero} ${contentData.thumbnailUrl ? styles.heroHasImage : ''}`}>
                 <div className="container">
                     <button onClick={() => window.history.back()} className={styles.backLink}>
                         <ArrowLeft size={16} /> Back
@@ -107,27 +107,38 @@ export default function ContentReadPage() {
             </div>
 
             <div className="container">
-                <div className={styles.contentLayout}>
+                <div className={`${styles.contentLayout} ${contentData.thumbnailUrl ? styles.layoutHasImage : ''}`}>
                     <div className={styles.mainContent}>
-                        {contentData.contentType === 'article' || contentData.contentType === 'notes' ? (
-                            <div
-                                className={styles.richTextContainer}
-                                dangerouslySetInnerHTML={{ __html: contentData.content || '<p>No content provided.</p>' }}
-                            />
-                        ) : (
-                            <div className={styles.fileContainer}>
-                                <div className={styles.fileIcon}>📄</div>
-                                <h3>{contentData.title}</h3>
-                                <p>This is a {contentData.contentType} file.</p>
-                                {contentData.fileUrl ? (
-                                    <a href={contentData.fileUrl} target="_blank" rel="noopener noreferrer" className={styles.primaryButton}>
-                                        Open {contentData.contentType}
-                                    </a>
-                                ) : (
-                                    <p style={{ color: '#ef4444' }}>File URL is missing.</p>
-                                )}
+                        {contentData.thumbnailUrl && (
+                            <div className={styles.coverImageWrapper}>
+                                <img
+                                    src={contentData.thumbnailUrl}
+                                    alt={contentData.title}
+                                    className={styles.coverImage}
+                                />
                             </div>
                         )}
+                        <div className={styles.articleBodyWrapper}>
+                            {contentData.contentType === 'article' || contentData.contentType === 'notes' ? (
+                                <div
+                                    className={styles.richTextContainer}
+                                    dangerouslySetInnerHTML={{ __html: contentData.content || '<p>No content provided.</p>' }}
+                                />
+                            ) : (
+                                <div className={styles.fileContainer}>
+                                    <div className={styles.fileIcon}>📄</div>
+                                    <h3>{contentData.title}</h3>
+                                    <p>This is a {contentData.contentType} file.</p>
+                                    {contentData.fileUrl ? (
+                                        <a href={contentData.fileUrl} target="_blank" rel="noopener noreferrer" className={styles.primaryButton}>
+                                            Open {contentData.contentType}
+                                        </a>
+                                    ) : (
+                                        <p style={{ color: '#ef4444' }}>File URL is missing.</p>
+                                    )}
+                                </div>
+                            )}
+                        </div>
                     </div>
 
                     <div className={styles.sidebar}>

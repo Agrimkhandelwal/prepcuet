@@ -1,6 +1,6 @@
 'use client';
 
-import { Play, Calendar, Users, Target, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Play, Calendar, Users, Target, ShieldCheck, CheckCircle2, Clock } from 'lucide-react';
 import styles from '../courses.module.css';
 
 export default function OnlineBatchesPage() {
@@ -32,9 +32,12 @@ export default function OnlineBatchesPage() {
                                 <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Doubt Support</div>
                             </div>
                         </div>
-                        <button style={{ background: 'var(--primary)', color: 'white', padding: '1.25rem 3rem', borderRadius: '16px', fontWeight: 700, border: 'none', cursor: 'pointer' }}>
-                            Enroll for Free Demo
-                        </button>
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', background: 'rgba(30, 41, 59, 0.4)', backdropFilter: 'blur(10px)', color: '#fff', border: '1px solid rgba(52, 211, 153, 0.3)', padding: '1rem 2.5rem', borderRadius: '50px', fontWeight: 600, fontSize: '1.1rem', boxShadow: '0 0 20px rgba(52, 211, 153, 0.1), inset 0 0 10px rgba(52, 211, 153, 0.05)' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', background: 'rgba(52, 211, 153, 0.2)', borderRadius: '50%', color: '#34d399' }}>
+                                <Calendar size={16} />
+                            </div>
+                            Enrollment Starting Soon
+                        </div>
                     </div>
                     <div style={{ position: 'relative' }}>
                         <img
@@ -65,20 +68,16 @@ export default function OnlineBatchesPage() {
 
                 <div style={{ padding: '4rem', background: 'var(--surface)', borderRadius: '32px', textAlign: 'center' }}>
                     <h3 style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text-main)', marginBottom: '3rem' }}>Available Batches</h3>
-                    <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 2.5rem', background: 'white', borderRadius: '16px', border: '1px solid var(--border)' }}>
-                            <div style={{ textAlign: 'left' }}>
-                                <div style={{ fontWeight: 800, fontSize: '1.1rem' }}>Morning Dominators (Live)</div>
-                                <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>08:00 AM - 10:00 AM</div>
+                    <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center', padding: '4rem 2rem', background: 'linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%)', backdropFilter: 'blur(10px)', border: '1px dashed rgba(255, 255, 255, 0.1)', borderRadius: '32px', position: 'relative', overflow: 'hidden' }}>
+                        {/* Glow effect */}
+                        <div style={{ position: 'absolute', top: '-50%', left: '50%', transform: 'translateX(-50%)', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)', filter: 'blur(40px)', zIndex: 0 }} />
+
+                        <div style={{ position: 'relative', zIndex: 1 }}>
+                            <div style={{ width: '80px', height: '80px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', color: '#60a5fa', boxShadow: '0 0 30px rgba(59, 130, 246, 0.2)' }}>
+                                <Clock size={40} />
                             </div>
-                            <span style={{ color: 'var(--primary)', fontWeight: 700 }}>Starting Feb 15</span>
-                        </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 2.5rem', background: 'white', borderRadius: '16px', border: '1px solid var(--border)' }}>
-                            <div style={{ textAlign: 'left' }}>
-                                <div style={{ fontWeight: 800, fontSize: '1.1rem' }}>Evening Mavericks (Live)</div>
-                                <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>06:00 PM - 08:00 PM</div>
-                            </div>
-                            <span style={{ color: 'var(--primary)', fontWeight: 700 }}>Starting Feb 20</span>
+                            <h4 style={{ fontSize: '2rem', fontWeight: 800, color: '#fff', marginBottom: '1rem', letterSpacing: '-0.02em' }}>Batches Announcing Soon</h4>
+                            <p style={{ color: '#94a3b8', fontSize: '1.15rem', lineHeight: 1.6, maxWidth: '600px', margin: '0 auto' }}>We are meticulously designing the curriculum and finalizing schedules with India's top CUET educators. Complete batch details will be revealed here shortly.</p>
                         </div>
                     </div>
                 </div>

@@ -3,7 +3,7 @@
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { ArrowLeft, BookOpen, Clock, Calendar } from 'lucide-react';
+import { ArrowLeft, BookOpen, Clock, Calendar, FileText, ChevronRight, LayoutDashboard, Bookmark, TrendingUp } from 'lucide-react';
 import { db } from '@/lib/firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { SubjectDoc, Content } from '@/lib/firestore-schema';
@@ -117,7 +117,10 @@ export default function SubjectPage() {
             <div className="container">
                 <div className={styles.contentGrid}>
                     <div className={styles.mainColumn}>
-                        <h2 className={styles.sectionTitle}>Latest Content in {subject.name}</h2>
+                        <h2 className={styles.sectionTitle}>
+                            <LayoutDashboard size={24} color="var(--primary)" />
+                            Latest Content in {subject.name}
+                        </h2>
                         <div className={styles.articleList}>
                             {/* Rendering articles from Firestore content collection */}
                             {contents.length > 0 ? (
@@ -149,10 +152,30 @@ export default function SubjectPage() {
                         <div className={styles.sidebarWidget}>
                             <h3>Quick Links</h3>
                             <ul className={styles.widgetList}>
-                                <li>Syllabus & Curriculum</li>
-                                <li>Previous Year Questions</li>
-                                <li>Toppers' Notes</li>
-                                <li>Recommended Books</li>
+                                <li>
+                                    <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <BookOpen size={16} /> Syllabus & Curriculum
+                                    </span>
+                                    <ChevronRight size={16} />
+                                </li>
+                                <li>
+                                    <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <TrendingUp size={16} /> Previous Year Questions
+                                    </span>
+                                    <ChevronRight size={16} />
+                                </li>
+                                <li>
+                                    <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <FileText size={16} /> Toppers' Notes
+                                    </span>
+                                    <ChevronRight size={16} />
+                                </li>
+                                <li>
+                                    <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <Bookmark size={16} /> Recommended Books
+                                    </span>
+                                    <ChevronRight size={16} />
+                                </li>
                             </ul>
                         </div>
                     </div>

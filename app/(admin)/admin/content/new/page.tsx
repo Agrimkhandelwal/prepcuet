@@ -7,6 +7,11 @@ import { collection, addDoc, getDocs, query, orderBy, Timestamp } from 'firebase
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { SubjectDoc, Content } from '@/lib/firestore-schema';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+import 'react-quill-new/dist/quill.snow.css';
+
+const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
+
 import {
     ArrowLeft,
     Save,
@@ -42,6 +47,10 @@ export default function NewContentPage() {
     const [contentBody, setContentBody] = useState(''); // For Article/Notes text
     const [fileUrl, setFileUrl] = useState(''); // For PDF/Video/Image
     const [file, setFile] = useState<File | null>(null);
+
+    // Cover Image State
+    const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
+    const [thumbnailUrl, setThumbnailUrl] = useState('');
 
     useEffect(() => {
         fetchSubjects();
@@ -115,6 +124,36 @@ export default function NewContentPage() {
         });
     };
 
+    const uploadThumbnail = async (): Promise<string | null> => {
+        if (!thumbnailFile) return null;
+
+        return new Promise((resolve) => {
+            setUploading(true);
+            const storageRef = ref(storage, `thumbnails/${Date.now()}_${thumbnailFile.name.replace(/[^a-zA-Z0-9.\-_]/g, '_')}`);
+            const uploadTask = uploadBytesResumable(storageRef, thumbnailFile);
+
+            uploadTask.on(
+                'state_changed',
+                () => { },
+                (err) => {
+                    console.error("Thumbnail upload failed:", err);
+                    setUploading(false);
+                    resolve(null);
+                },
+                async () => {
+                    try {
+                        const url = await getDownloadURL(uploadTask.snapshot.ref);
+                        setUploading(false);
+                        resolve(url);
+                    } catch (err) {
+                        setUploading(false);
+                        resolve(null);
+                    }
+                }
+            );
+        });
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
@@ -128,6 +167,7 @@ export default function NewContentPage() {
 
         try {
             let finalFileUrl = fileUrl;
+            let finalThumbnailUrl = thumbnailUrl;
 
             // Handle file upload if a file is selected
             if (file) {
@@ -139,6 +179,14 @@ export default function NewContentPage() {
                 finalFileUrl = uploadedUrl;
             }
 
+            // Handle thumbnail upload if a file is selected
+            if (thumbnailFile) {
+                const uploadedThumbUrl = await uploadThumbnail();
+                if (uploadedThumbUrl) {
+                    finalThumbnailUrl = uploadedThumbUrl;
+                }
+            }
+
             const subject = subjects.find(s => s.id === selectedSubjectId);
 
             const contentData: any = {
@@ -148,6 +196,7 @@ export default function NewContentPage() {
                 subjectName: subject?.name || 'Unknown',
                 contentType,
                 fileUrl: finalFileUrl,
+                thumbnailUrl: finalThumbnailUrl,
                 content: contentBody,
                 isFree,
                 isPublished,
@@ -259,22 +308,58 @@ export default function NewContentPage() {
                         </select>
                     </div>
 
+                    {/* Cover Image */}
+                    <div className={styles.fullWidth}>
+                        <label className={styles.label}>Cover Image (Optional)</label>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', background: '#f8fafc', padding: '1rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                            <p style={{ fontSize: '0.85rem', color: '#64748b', margin: 0 }}>Upload an image or provide a URL to display at the top of the article.</p>
+                            <input
+                                type="file"
+                                onChange={(e) => {
+                                    if (e.target.files && e.target.files[0]) {
+                                        setThumbnailFile(e.target.files[0]);
+                                    }
+                                }}
+                                className={styles.input}
+                                accept="image/*"
+                            />
+                            <div style={{ textAlign: 'center', color: '#64748b', fontSize: '0.9rem' }}>- OR -</div>
+                            <input
+                                type="url"
+                                value={thumbnailUrl}
+                                onChange={(e) => setThumbnailUrl(e.target.value)}
+                                className={styles.input}
+                                placeholder="Enter external image URL"
+                            />
+                        </div>
+                    </div>
+
                     {/* Type Sensitive Fields */}
                     <div className={styles.fullWidth} style={{ background: '#f8fafc', padding: '1.5rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
                         {(contentType === 'article' || contentType === 'notes') ? (
-                            <>
-                                <label className={styles.label}>Content Body (HTML/Text)</label>
-                                <textarea
-                                    value={contentBody}
-                                    onChange={(e) => setContentBody(e.target.value)}
-                                    className={styles.textarea}
-                                    rows={10}
-                                    placeholder="Write your content here..."
-                                />
+                            <div style={{ paddingBottom: '2.5rem' }}>
+                                <label className={styles.label}>Content Body (Rich Text)</label>
+                                <div style={{ background: 'white', minHeight: '400px' }}>
+                                    <ReactQuill
+                                        theme="snow"
+                                        value={contentBody}
+                                        onChange={setContentBody}
+                                        style={{ height: '350px' }}
+                                        modules={{
+                                            toolbar: [
+                                                [{ 'header': [1, 2, 3, false] }],
+                                                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                                                ['link', 'image'],
+                                                ['clean']
+                                            ],
+                                        }}
+                                    />
+                                </div>
                                 <p style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '0.5rem' }}>
-                                    Tip: You can paste HTML directly here.
+                                    Tip: Write your articles, add bullet points, and even paste images directly into the text for reference.
                                 </p>
-                            </>
+                            </div>
                         ) : (
                             <>
                                 <label className={styles.label}>File Upload / URL</label>

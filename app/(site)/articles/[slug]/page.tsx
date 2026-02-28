@@ -19,6 +19,7 @@ interface Article {
     status: string;
     date: string;
     views: number;
+    imageUrl?: string;
 }
 
 export default function ArticlePage() {
@@ -81,60 +82,72 @@ export default function ArticlePage() {
     }
 
     return (
-        <div className="container" style={{ padding: '2rem 1rem' }}>
-            <div className={styles.layout}>
-                <article className={styles.mainContent}>
-                    {/* Breadcrumb */}
-                    <div className={styles.breadcrumb}>
-                        <Link href="/">Home</Link> / <Link href="/current-affairs">Current Affairs</Link> / <span>{article.category}</span>
-                    </div>
-
-                    {/* Header */}
-                    <header className={styles.header}>
-                        <div className={styles.meta}>
-                            <span className={styles.category}>{article.category}</span>
-                            <span className={styles.date}><Calendar size={14} /> {article.date}</span>
-                            <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#94a3b8', fontSize: '0.875rem' }}>
-                                <Eye size={14} /> {article.views} views
-                            </span>
-                        </div>
-                        <h1 className={styles.title}>{article.title}</h1>
-                        <p className={styles.summary}>{article.summary}</p>
-
-                        <div className={styles.actions}>
-                            <button className={styles.actionBtn} onClick={() => navigator.share?.({ title: article.title, url: window.location.href })}>
-                                <Share2 size={16} /> Share
-                            </button>
-                        </div>
-                    </header>
-
-                    {/* Content Body */}
-                    <div className={styles.contentBody}>
-                        {article.content ? (
-                            <div dangerouslySetInnerHTML={{ __html: article.content }} />
-                        ) : (
-                            <p style={{ color: '#94a3b8', fontStyle: 'italic' }}>Full article content not available.</p>
-                        )}
-                    </div>
-
-                    {/* Tags */}
-                    {article.tags?.length > 0 && (
-                        <div className={styles.tagsSection}>
-                            {article.tags.map(tag => (
-                                <span key={tag} className={styles.tag}>#{tag}</span>
-                            ))}
-                        </div>
-                    )}
-
-                    <div style={{ marginTop: '2rem' }}>
-                        <Link href="/current-affairs" style={{ color: '#b91c1c', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                            <ChevronLeft size={16} /> More Current Affairs
+        <div className={styles.pageContainer}>
+            <div className={`${styles.hero} ${article.imageUrl ? styles.heroHasImage : ''}`}>
+                <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+                    <div className={styles.headerContent}>
+                        {/* Breadcrumb / Top Link */}
+                        <Link href="/current-affairs" className={styles.backLink}>
+                            <ChevronLeft size={16} /> Back to Daily Current Affairs
                         </Link>
-                    </div>
-                </article>
 
-                <div className={styles.sidebarWrapper}>
-                    <Sidebar />
+                        <div className={styles.badges}>
+                            <span className={styles.categoryBadge}>{article.category}</span>
+                        </div>
+
+                        <h1 className={styles.title}>{article.title}</h1>
+                        <p className={styles.subtitle}>{article.summary}</p>
+
+                        <div className={styles.meta}>
+                            <div className={styles.metaItem}>
+                                <Calendar size={16} />
+                                <span>{article.date}</span>
+                            </div>
+                            <div className={styles.metaItem}>
+                                <Eye size={16} />
+                                <span>{article.views} views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="container">
+                <div className={`${styles.layout} ${article.imageUrl ? styles.layoutHasImage : ''}`}>
+                    <article className={styles.mainContent}>
+                        {article.imageUrl && (
+                            <div className={styles.coverImageWrapper}>
+                                <img
+                                    src={article.imageUrl}
+                                    alt={article.title}
+                                    className={styles.coverImage}
+                                />
+                            </div>
+                        )}
+                        <div className={styles.articleBodyWrapper}>
+                            {article.content ? (
+                                <div dangerouslySetInnerHTML={{ __html: article.content }} />
+                            ) : (
+                                <div className={styles.fileContainer}>
+                                    <div className={styles.fileIcon}>📄</div>
+                                    <h3>Full article content not available.</h3>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Tags */}
+                        {article.tags?.length > 0 && (
+                            <div className={styles.tagsSection}>
+                                {article.tags.map(tag => (
+                                    <span key={tag} className={styles.tag}>#{tag}</span>
+                                ))}
+                            </div>
+                        )}
+                    </article>
+
+                    <div className={styles.sidebarWrapper}>
+                        <Sidebar />
+                    </div>
                 </div>
             </div>
         </div>

@@ -14,13 +14,6 @@ export default function CoursesPage() {
             image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop'
         },
         {
-            title: 'Offline Classroom',
-            desc: 'Traditional physical classroom programs with personal mentorship and structured study environment.',
-            icon: <GraduationCap size={40} />,
-            link: '/courses/offline',
-            image: 'https://images.unsplash.com/photo-1523050335392-9bef867a0578?q=80&w=2020&auto=format&fit=crop'
-        },
-        {
             title: 'Test Series',
             desc: 'Rigorous mock tests based on the latest CUET pattern with detailed analysis and rank tracking.',
             icon: <FileSearch size={40} />,

@@ -31,6 +31,7 @@ const NAV_ITEMS = [
     { href: '/admin/users', icon: User, label: 'Users' },
     { href: '/admin/test-series', icon: FileText, label: 'Test Series' },
     { href: '/admin/content', icon: FileIcon, label: 'Content' },
+    { href: '/admin/previous-papers', icon: FileIcon, label: 'Past Papers' },
 ];
 
 export default function AdminLayout({

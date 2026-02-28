@@ -84,6 +84,7 @@
     z-index: -1;
     background: inherit;
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: blur(20px);
     opacity: 0.4;
@@ -574,6 +575,33 @@
     background: var(--surface);
     border-radius: 24px;
     border: 2px dashed var(--border);
+}
+
+/* 
+   ==========================================================================
+   Test Categories
+   ========================================================================== 
+*/
+.categorySection {
+    margin-bottom: 4rem;
+    width: 100%;
+}
+
+.categoryTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+[data-theme='dark'] .categoryTitle {
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* 

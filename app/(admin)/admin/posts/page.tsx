@@ -6,8 +6,13 @@ import {
     collection, addDoc, getDocs, updateDoc, deleteDoc,
     doc, query, orderBy, serverTimestamp, Timestamp
 } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { db, storage } from '@/lib/firebase';
+import dynamic from 'next/dynamic';
+import 'react-quill-new/dist/quill.snow.css';
 import styles from '../../Admin.module.css';
+
+const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
 interface Article {
     id: string;
@@ -20,6 +25,7 @@ interface Article {
     date: string;
     views: number;
     createdAt?: Timestamp;
+    imageUrl?: string;
 }
 
 const CATEGORIES = ['Current Affairs', 'Editorials', 'Strategy', 'Quiz', 'CUET Practice'];
@@ -38,7 +44,12 @@ export default function PostsPage() {
         category: 'Current Affairs',
         tags: '',
         status: 'Draft' as 'Published' | 'Draft',
+        imageUrl: '',
     });
+
+    // Image Upload State
+    const [file, setFile] = useState<File | null>(null);
+    const [uploading, setUploading] = useState(false);
 
     // Load articles from Firestore
     const fetchArticles = async () => {
@@ -77,15 +88,47 @@ export default function PostsPage() {
                 category: article.category,
                 tags: article.tags.join(', '),
                 status: article.status,
+                imageUrl: article.imageUrl || '',
             });
         } else {
             setEditingArticle(null);
-            setFormData({ title: '', summary: '', content: '', category: 'Current Affairs', tags: '', status: 'Draft' });
+            setFormData({ title: '', summary: '', content: '', category: 'Current Affairs', tags: '', status: 'Draft', imageUrl: '' });
         }
+        setFile(null);
         setIsModalOpen(true);
     };
 
-    const closeModal = () => { setIsModalOpen(false); setEditingArticle(null); };
+    const closeModal = () => { setIsModalOpen(false); setEditingArticle(null); setFile(null); };
+
+    const uploadThumbnail = async (): Promise<string | null> => {
+        if (!file) return null;
+
+        return new Promise((resolve) => {
+            setUploading(true);
+            const storageRef = ref(storage, `thumbnails/${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.\-_]/g, '_')}`);
+            const uploadTask = uploadBytesResumable(storageRef, file);
+
+            uploadTask.on(
+                'state_changed',
+                () => { },
+                (err) => {
+                    console.error("Cover image upload failed:", err);
+                    setUploading(false);
+                    resolve(null);
+                },
+                async () => {
+                    try {
+                        const url = await getDownloadURL(uploadTask.snapshot.ref);
+                        setUploading(false);
+                        resolve(url);
+                    } catch (err) {
+                        setUploading(false);
+                        resolve(null);
+                    }
+                }
+            );
+        });
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -93,6 +136,15 @@ export default function PostsPage() {
         const tagsArray = formData.tags.split(',').map(t => t.trim()).filter(Boolean);
 
         try {
+            let finalImageUrl = formData.imageUrl;
+
+            if (file) {
+                const uploadedUrl = await uploadThumbnail();
+                if (uploadedUrl) {
+                    finalImageUrl = uploadedUrl;
+                }
+            }
+
             if (editingArticle) {
                 await updateDoc(doc(db, 'articles', editingArticle.id), {
                     title: formData.title,
@@ -101,6 +153,7 @@ export default function PostsPage() {
                     category: formData.category,
                     tags: tagsArray,
                     status: formData.status,
+                    imageUrl: finalImageUrl,
                 });
             } else {
                 await addDoc(collection(db, 'articles'), {
@@ -111,6 +164,7 @@ export default function PostsPage() {
                     tags: tagsArray,
                     status: formData.status,
                     views: 0,
+                    imageUrl: finalImageUrl,
                     createdAt: serverTimestamp(),
                 });
             }
@@ -254,13 +308,51 @@ export default function PostsPage() {
                                     onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
                                     placeholder="Brief 1-2 line description of this article" required />
                             </div>
+
                             <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>Full Article Content</label>
-                                <textarea className={styles.formTextarea}
-                                    style={{ minHeight: '180px', fontFamily: 'monospace', fontSize: '0.875rem' }}
-                                    value={formData.content}
-                                    onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                                    placeholder="Write the full article content here. Supports plain text (HTML tags also work)." />
+                                <label className={styles.formLabel}>Cover Image (Optional)</label>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', background: '#f8fafc', padding: '1rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                                    <input
+                                        type="file"
+                                        onChange={(e) => {
+                                            if (e.target.files && e.target.files[0]) {
+                                                setFile(e.target.files[0]);
+                                            }
+                                        }}
+                                        className={styles.formInput}
+                                        accept="image/*"
+                                        style={{ background: 'white' }}
+                                    />
+                                    <div style={{ textAlign: 'center', color: '#64748b', fontSize: '0.8rem' }}>- OR -</div>
+                                    <input
+                                        type="url"
+                                        value={formData.imageUrl}
+                                        onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+                                        className={styles.formInput}
+                                        placeholder="Enter external image URL"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className={styles.formGroup}>
+                                <label className={styles.formLabel}>Full Article Content (Rich Text)</label>
+                                <div style={{ background: 'white' }}>
+                                    <ReactQuill
+                                        theme="snow"
+                                        value={formData.content}
+                                        onChange={(value) => setFormData({ ...formData, content: value })}
+                                        style={{ minHeight: '200px' }}
+                                        modules={{
+                                            toolbar: [
+                                                [{ 'header': [1, 2, 3, false] }],
+                                                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                                                ['link', 'image'],
+                                                ['clean']
+                                            ],
+                                        }}
+                                    />
+                                </div>
                             </div>
                             <div className={styles.formRow}>
                                 <div className={styles.formGroup}>
@@ -286,9 +378,9 @@ export default function PostsPage() {
                                     placeholder="e.g. GS-2, Polity, Environment" />
                             </div>
                             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
-                                <button type="button" className={styles.secondaryBtn} onClick={closeModal}>Cancel</button>
-                                <button type="submit" className={styles.primaryBtn} disabled={saving}>
-                                    {saving ? <><Loader2 size={16} style={{ animation: 'spin 1s linear infinite' }} /> Saving...</> : editingArticle ? 'Update Article' : 'Publish Article'}
+                                <button type="button" className={styles.secondaryBtn} onClick={closeModal} disabled={saving || uploading}>Cancel</button>
+                                <button type="submit" className={styles.primaryBtn} disabled={saving || uploading}>
+                                    {saving || uploading ? <><Loader2 size={16} style={{ animation: 'spin 1s linear infinite' }} /> Saving...</> : editingArticle ? 'Update Article' : 'Publish Article'}
                                 </button>
                             </div>
                         </form>

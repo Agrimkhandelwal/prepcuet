@@ -12,7 +12,6 @@ export default function QuickLinks() {
         { id: 1, title: t.quickLinks.currentAffairs, icon: Newspaper, href: '/current-affairs', color: '#3b82f6' },
         { id: 2, title: t.quickLinks.previousYearPaper, icon: FileText, href: '/previous-year-papers', color: '#10b981' },
         { id: 3, title: t.quickLinks.dailyQuiz, icon: CheckCircle, href: '/daily-quiz', color: '#ef4444' },
-        { id: 4, title: t.quickLinks.videos, icon: Video, href: '/videos', color: '#8b5cf6' },
         { id: 5, title: t.quickLinks.updates, icon: Bell, href: '/updates', color: '#f59e0b' },
     ];
 

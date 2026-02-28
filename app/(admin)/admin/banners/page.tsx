@@ -1,11 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Plus, Image, Edit2, Trash2, GripVertical, Eye } from 'lucide-react';
 import styles from '../../Admin.module.css';
+import { db } from '@/lib/firebase';
+import { collection, getDocs, doc, setDoc, updateDoc, deleteDoc, query, orderBy } from 'firebase/firestore';
 
 interface Banner {
-    id: number;
+    id: string;
     title: string;
     subtitle: string;
     description: string;
@@ -14,46 +16,12 @@ interface Banner {
     badge: string | null;
     color: string;
     active: boolean;
+    order: number;
 }
 
-const INITIAL_BANNERS: Banner[] = [
-    {
-        id: 1,
-        title: "Integrated Foundation Batch 2026",
-        subtitle: "Admissions Open | Starts Feb 15th",
-        description: "Comprehensive coverage of all subjects with personal mentorship.",
-        cta: "Enroll Now",
-        link: "/courses/foundation-2026",
-        badge: "New Batch",
-        color: "linear-gradient(135deg, #1e293b 0%, #334155 100%)",
-        active: true
-    },
-    {
-        id: 2,
-        title: "CUET Mock Test Series 2026",
-        subtitle: "Boost your score with 30+ Tests",
-        description: "Scientifically designed test series to improve accuracy and speed.",
-        cta: "View Schedule",
-        link: "/courses/test-series",
-        badge: "Early Bird Offer",
-        color: "linear-gradient(135deg, #b91c1c 0%, #991b1b 100%)",
-        active: true
-    },
-    {
-        id: 3,
-        title: "Subject-wise Preparation",
-        subtitle: "Master Each Subject",
-        description: "Expert faculty for all CUET subjects with comprehensive study material.",
-        cta: "Learn More",
-        link: "/courses/subjects",
-        badge: null,
-        color: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
-        active: true
-    }
-];
-
 export default function BannersPage() {
-    const [banners, setBanners] = useState<Banner[]>(INITIAL_BANNERS);
+    const [banners, setBanners] = useState<Banner[]>([]);
+    const [loading, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingBanner, setEditingBanner] = useState<Banner | null>(null);
     const [formData, setFormData] = useState({
@@ -73,6 +41,76 @@ export default function BannersPage() {
         { name: 'Purple', value: 'linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)' },
         { name: 'Green', value: 'linear-gradient(135deg, #059669 0%, #047857 100%)' },
     ];
+
+    const fetchBanners = async () => {
+        setLoading(true);
+        try {
+            const q = query(collection(db, 'banners'), orderBy('order', 'asc'));
+            const snapshot = await getDocs(q);
+
+            if (snapshot.empty) {
+                // Seed default banners into Firestore
+                const defaults: Banner[] = [
+                    {
+                        id: 'mock-1',
+                        title: "Integrated Foundation Batch 2026",
+                        subtitle: "Admissions Open | Starts Feb 15th",
+                        description: "Comprehensive coverage of all subjects with personal mentorship.",
+                        cta: "Enroll Now",
+                        link: "/courses/foundation-2026",
+                        badge: "New Batch",
+                        color: "linear-gradient(135deg, #1e293b 0%, #334155 100%)",
+                        active: true,
+                        order: 0
+                    },
+                    {
+                        id: 'mock-2',
+                        title: "CUET Mock Test Series 2026",
+                        subtitle: "Boost your score with 30+ Tests",
+                        description: "Scientifically designed test series to improve accuracy and speed.",
+                        cta: "View Schedule",
+                        link: "/courses/test-series",
+                        badge: "Early Bird Offer",
+                        color: "linear-gradient(135deg, #b91c1c 0%, #991b1b 100%)",
+                        active: true,
+                        order: 1
+                    },
+                    {
+                        id: 'mock-3',
+                        title: "Subject-wise Preparation",
+                        subtitle: "Master Each Subject",
+                        description: "Expert faculty for all CUET subjects with comprehensive study material.",
+                        cta: "Learn More",
+                        link: "/courses/subjects",
+                        badge: null,
+                        color: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
+                        active: true,
+                        order: 2
+                    }
+                ];
+
+                for (const banner of defaults) {
+                    await setDoc(doc(db, 'banners', banner.id), banner);
+                }
+                setBanners(defaults);
+            } else {
+                const fetchedBanners = snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                })) as Banner[];
+                setBanners(fetchedBanners);
+            }
+        } catch (error) {
+            console.error("Error fetching banners:", error);
+            alert("Failed to load banners");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchBanners();
+    }, []);
 
     const openModal = (banner?: Banner) => {
         if (banner) {
@@ -106,36 +144,62 @@ export default function BannersPage() {
         setEditingBanner(null);
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (editingBanner) {
-            setBanners(banners.map(b =>
-                b.id === editingBanner.id
-                    ? { ...b, ...formData, badge: formData.badge || null }
-                    : b
-            ));
-        } else {
-            const newBanner: Banner = {
-                id: Date.now(),
-                ...formData,
-                badge: formData.badge || null,
-                active: true
-            };
-            setBanners([...banners, newBanner]);
+        try {
+            if (editingBanner) {
+                // Update
+                const docRef = doc(db, 'banners', editingBanner.id);
+                const updatedData = { ...formData, badge: formData.badge || null };
+                await updateDoc(docRef, updatedData);
+
+                setBanners(banners.map(b =>
+                    b.id === editingBanner.id ? { ...b, ...updatedData } : b
+                ));
+            } else {
+                // Create
+                const newId = `banner-${Date.now()}`;
+                const newBannerData = {
+                    ...formData,
+                    badge: formData.badge || null,
+                    active: true,
+                    order: banners.length
+                };
+
+                await setDoc(doc(db, 'banners', newId), newBannerData);
+                setBanners([...banners, { id: newId, ...newBannerData }]);
+            }
+            closeModal();
+        } catch (error) {
+            console.error("Error saving banner:", error);
+            alert("Failed to save banner");
         }
-        closeModal();
     };
 
-    const deleteBanner = (id: number) => {
+    const deleteBanner = async (id: string) => {
         if (confirm('Are you sure you want to delete this banner?')) {
-            setBanners(banners.filter(b => b.id !== id));
+            try {
+                await deleteDoc(doc(db, 'banners', id));
+                setBanners(banners.filter(b => b.id !== id));
+            } catch (error) {
+                console.error("Error deleting banner:", error);
+                alert("Failed to delete banner");
+            }
         }
     };
 
-    const toggleActive = (id: number) => {
-        setBanners(banners.map(b =>
-            b.id === id ? { ...b, active: !b.active } : b
-        ));
+    const toggleActive = async (id: string, currentStatus: boolean) => {
+        try {
+            const docRef = doc(db, 'banners', id);
+            await updateDoc(docRef, { active: !currentStatus });
+
+            setBanners(banners.map(b =>
+                b.id === id ? { ...b, active: !currentStatus } : b
+            ));
+        } catch (error) {
+            console.error("Error toggling banner status:", error);
+            alert("Failed to update status");
+        }
     };
 
     return (
@@ -192,7 +256,7 @@ export default function BannersPage() {
                                 </span>
                                 <button
                                     className={styles.secondaryBtn}
-                                    onClick={() => toggleActive(banner.id)}
+                                    onClick={() => toggleActive(banner.id, banner.active)}
                                     style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem' }}
                                 >
                                     {banner.active ? 'Deactivate' : 'Activate'}

@@ -52,12 +52,16 @@ export default function SignupPage() {
                 isEmailVerified: false,
             });
 
-            // Send welcome email (don't block on this)
-            fetch('/api/send-welcome-email', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ userName: name, userEmail: email }),
-            }).catch(err => console.error('Failed to send welcome email:', err));
+            // Send welcome email
+            try {
+                await fetch('/api/send-welcome-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userName: name, userEmail: email }),
+                });
+            } catch (err) {
+                console.error('Failed to send welcome email:', err);
+            }
 
             router.push('/login?registered=true');
         } catch (err: any) {

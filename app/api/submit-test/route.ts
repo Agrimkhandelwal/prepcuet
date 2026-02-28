@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { collection, addDoc, Timestamp, query, where, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { TestResult } from '@/lib/firestore-schema';
+import { sendSubmissionConfirmationEmail } from '@/lib/email-service';
 
 // Max attempts allowed per test
 const MAX_ATTEMPTS = 3;
@@ -55,14 +56,13 @@ export async function POST(request: NextRequest) {
         // 3. Save to Firestore
         const docRef = await addDoc(collection(db, 'testResults'), testResult);
 
-        // 4. Send Confirmation Email (Async - don't block response)
+        // 4. Send Confirmation Email (Awaited to ensure serverless func doesn't terminate early)
         if (userEmail) {
-            // We use import() dynamically or just call the function if imported
-            // Intentionally not awaiting to speed up response, but logging errors
-            import('@/lib/email-service').then(({ sendSubmissionConfirmationEmail }) => {
-                sendSubmissionConfirmationEmail(userName, userEmail, testTitle, testId)
-                    .catch(err => console.error('Failed to send submission email:', err));
-            });
+            try {
+                await sendSubmissionConfirmationEmail(userName, userEmail, testTitle, testId);
+            } catch (err) {
+                console.error('Failed to send submission email:', err);
+            }
         }
 
         return NextResponse.json({

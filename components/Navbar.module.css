@@ -1,14 +1,18 @@
 .header {
-    background: var(--background);
-    border-bottom: 1px solid var(--border);
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     position: sticky;
     top: 0;
-    z-index: 40;
+    z-index: 50;
     transition: all 0.3s ease;
 }
 
 .header.scrolled {
-    box-shadow: var(--shadow-sm);
+    background: rgba(15, 23, 42, 0.85);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .inner {
@@ -55,11 +59,11 @@
 }
 
 .brandPrep {
-    color: var(--text-main);
+    color: #f8fafc;
 }
 
 .brandCUET {
-    color: var(--primary);
+    color: #34d399;
 }
 
 /* Nav */
@@ -72,16 +76,17 @@
 
 .navItem {
     position: relative;
-    color: var(--text-muted);
-    transition: color 0.2s ease;
+    color: #94a3b8;
+    transition: all 0.2s ease;
 }
 
 .navItem:hover {
-    color: var(--text-main);
+    color: #f8fafc;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 .highlightLink {
-    color: var(--text-main);
+    color: #f8fafc;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -92,10 +97,11 @@
     background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
     color: white;
     font-size: 0.65rem;
-    padding: 0.15rem 0.4rem;
-    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
     font-weight: 800;
     letter-spacing: 0.05em;
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
     animation: pulse 2s infinite;
 }
 
@@ -123,9 +129,11 @@
     position: absolute;
     top: 100%;
     left: 0;
-    background: var(--background);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-lg);
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     min-width: 220px;
     border-radius: 12px;
     opacity: 0;
@@ -145,14 +153,14 @@
 .dropdown a {
     padding: 0.6rem 1.25rem;
     font-size: 0.9rem;
-    color: var(--text-muted);
+    color: #94a3b8;
     display: block;
     transition: all 0.2s;
 }
 
 .dropdown a:hover {
-    background: var(--surface);
-    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
+    color: #f8fafc;
 }
 
 /* Actions */
@@ -163,7 +171,7 @@
 }
 
 .iconBtn {
-    color: var(--text-muted);
+    color: #94a3b8;
     width: 40px;
     height: 40px;
     display: flex;
@@ -174,8 +182,8 @@
 }
 
 .iconBtn:hover {
-    background: var(--surface);
-    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.1);
+    color: #f8fafc;
 }
 
 /* Dribbble Style User Profile */
@@ -223,9 +231,11 @@
     top: 100%;
     right: 0;
     margin-top: 1.25rem;
-    background: var(--background);
-    border: 1px solid var(--border);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     width: 280px;
     border-radius: 16px;
     overflow: hidden;
@@ -428,7 +438,9 @@
     left: 0;
     width: 100%;
     height: calc(100vh - 72px);
-    background: var(--background);
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     z-index: 50;
     padding: 1.5rem;
     display: flex;
@@ -458,7 +470,8 @@
     padding: 1.25rem 0;
     font-size: 1.1rem;
     font-weight: 700;
-    border-bottom: 1px solid var(--border);
+    color: #cbd5e1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .mobileHighlight {
@@ -471,7 +484,8 @@
     align-items: center;
     gap: 1rem;
     padding: 1.25rem;
-    background: var(--surface);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 16px;
 }
 

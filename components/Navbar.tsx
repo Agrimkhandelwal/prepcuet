@@ -96,7 +96,6 @@ export default function Navbar() {
                             <span>{t.navbar.courses} <ChevronDown size={14} /></span>
                             <div className={styles.dropdown}>
                                 <Link href="/courses/online">{t.navbar.onlineBatches}</Link>
-                                <Link href="/courses/offline">{t.navbar.offlineClassroom}</Link>
                             </div>
                         </div>
                         <Link href="/test-series" className={`${styles.navItem} ${styles.highlightLink}`}>
@@ -262,9 +261,6 @@ export default function Navbar() {
                 <nav className={styles.mobileNav}>
                     <Link href="/courses/online" className={styles.mobileNavItem} onClick={() => setIsMobileMenuOpen(false)}>
                         {t.navbar.onlineBatches} <ChevronRight size={18} />
-                    </Link>
-                    <Link href="/courses/offline" className={styles.mobileNavItem} onClick={() => setIsMobileMenuOpen(false)}>
-                        {t.navbar.offlineClassroom} <ChevronRight size={18} />
                     </Link>
                     <Link href="/test-series" className={`${styles.mobileNavItem} ${styles.mobileHighlight}`} onClick={() => setIsMobileMenuOpen(false)}>
                         <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
