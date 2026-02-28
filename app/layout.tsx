@@ -20,7 +20,8 @@ export const metadata: Metadata = {
         default: 'PrepCUET | Best CUET & Board Exam Preparation Platform',
         template: '%s | PrepCUET'
     },
-    description: 'Ace your CUET & Board Exams with PrepCUET.',
+    description: 'Ace your CUET UG & Board Exams with PrepCUET. Premium study materials, mock tests, and guidance.',
+    keywords: ['CUET', 'CUET mock tests', 'CUET UG', 'CUET test series', 'preepcuet', 'prepcuet', 'CUET online prep'],
     icons: {
         icon: '/favicon.ico',
     },

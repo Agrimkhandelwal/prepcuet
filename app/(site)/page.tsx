@@ -14,10 +14,11 @@ import styles from './Home.module.css';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'PrepCUET - #1 Platform for CUET & Subject Preparation',
-  description: 'Start your journey to your dream university with PrepCUET. Access thousands of practice questions, mock tests, and subject-wise study material designed for CUET success.',
+  title: 'PrepCUET | #1 Best CUET Preparation & Mock Test Platform 2026',
+  description: 'Start your journey to your dream university with PrepCUET. Access thousands of free CUET practice questions, chapter-wise mock tests, and expert study material designed for CUET UG success.',
+  keywords: ['CUET', 'CUET preparation', 'CUET mock tests', 'CUET 2026', 'CUET study material', 'CUET syllabus', 'free CUET mock tests', 'Common University Entrance Test'],
   alternates: {
-    canonical: 'https://prepcuet.com',
+    canonical: 'https://www.preepcuet.in',
   },
 };
 
