@@ -69,7 +69,7 @@ export default function SubjectTestsPage() {
                 querySnapshot.forEach((doc) => {
                     const data = doc.data() as TestSeries;
                     // Only include tests that map to the requested subject
-                    if (!data.subjects || !data.subjects.includes(subjectName)) return;
+                    if (!data.subjects || !data.subjects.includes(subjectName as any)) return;
 
                     const dateObj = data.createdAt.toDate();
                     const dateStr = dateObj.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });

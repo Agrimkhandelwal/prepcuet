@@ -94,7 +94,7 @@ export default function TestSeriesPage() {
                 {(Object.keys(SUBJECT_CATEGORIES) as CategoryKey[]).map((categoryKey) => {
                     const category = categoryDetails[categoryKey];
                     const subjects = SUBJECT_CATEGORIES[categoryKey];
-                    if (!subjects || subjects.length === 0) return null;
+                    if (!subjects) return null;
                     return (
                         <div key={categoryKey} className={subjectStyles.categorySection}>
                             <h2 className={subjectStyles.categoryTitle}>
