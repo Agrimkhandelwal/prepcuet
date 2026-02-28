@@ -126,7 +126,7 @@ export default function ArticlePage() {
                         )}
                         <div className={styles.articleBodyWrapper}>
                             {article.content ? (
-                                <div dangerouslySetInnerHTML={{ __html: article.content }} />
+                                <div className={styles.contentBody} dangerouslySetInnerHTML={{ __html: article.content }} />
                             ) : (
                                 <div className={styles.fileContainer}>
                                     <div className={styles.fileIcon}>📄</div>
