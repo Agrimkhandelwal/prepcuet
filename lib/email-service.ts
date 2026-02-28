@@ -119,14 +119,14 @@ export async function sendWelcomeEmail(userName: string, userEmail: string): Pro
 
           <!-- CTA Button -->
           <div style="text-align: center; margin: 40px 0;">
-            <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/test-series" 
+            <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.preepcuet.in'}/test-series" 
                style="display: inline-block; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; text-decoration: none; padding: 16px 40px; border-radius: 8px; font-weight: 600; font-size: 16px;">
               Start Practicing Now
             </a>
           </div>
 
           <p style="color: #64748b; font-size: 14px; line-height: 1.6; margin: 30px 0 0 0; text-align: center;">
-            Need help? Reply to this email or visit our <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/support" style="color: #3b82f6; text-decoration: none;">Support Center</a>
+            Need help? Reply to this email or visit our <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.preepcuet.in'}/support" style="color: #3b82f6; text-decoration: none;">Support Center</a>
           </p>
         </div>
 
@@ -156,7 +156,7 @@ export async function sendSubmissionConfirmationEmail(
   testTitle: string,
   testId: string
 ): Promise<boolean> {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.preepcuet.in';
   const subject = `✅ Test Submitted: ${testTitle} — Results in 10 minutes!`;
   const html = `
     <!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
@@ -199,7 +199,7 @@ export async function sendResultNotificationEmail(
   testId: string,
   resultId: string
 ): Promise<boolean> {
-  const resultUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/test-series/${testId}/result?ref=email`;
+  const resultUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.preepcuet.in'}/test-series/${testId}/result?ref=email`;
 
   const subject = `Your ${testTitle} Results Are Ready! 🎯`;
 
@@ -286,7 +286,7 @@ export async function sendTestNotificationEmail(
   testId: string,
   testDescription: string
 ): Promise<boolean> {
-  const testUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/test-series/${testId}`;
+  const testUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.preepcuet.in'}/test-series/${testId}`;
   const subject = `New Test Available: ${testTitle} 📚`;
 
   const html = `
