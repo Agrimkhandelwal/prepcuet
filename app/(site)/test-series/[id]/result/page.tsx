@@ -80,11 +80,13 @@ export default function ResultPage() {
             try {
                 const q = query(
                     collection(db, 'testResults'),
-                    where('testId', '==', testId),
-                    where('status', '==', 'available')
+                    where('testId', '==', testId)
                 );
                 const snap = await getDocs(q);
-                const scores = snap.docs.map(d => d.data().score as number).sort((a, b) => b - a);
+                const scores = snap.docs
+                    .filter(d => d.data().status === 'available')
+                    .map(d => d.data().score as number)
+                    .sort((a, b) => b - a);
                 setTotalAttempts(scores.length);
                 const pos = scores.findIndex(s => s <= result.score);
                 setRank(pos === -1 ? scores.length + 1 : pos + 1);

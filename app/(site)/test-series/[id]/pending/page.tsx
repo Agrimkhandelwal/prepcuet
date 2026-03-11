@@ -80,16 +80,26 @@ export default function PendingResultPage() {
             try {
                 const q = query(
                     collection(db, 'testResults'),
-                    where('userId', '==', user.uid),
-                    where('testId', '==', testId),
-                    where('status', '==', 'available'),
-                    orderBy('submittedAt', 'desc'),
-                    limit(1)
+                    where('userId', '==', user.uid)
                 );
                 const snap = await getDocs(q);
-                if (!snap.empty) {
+
+                // Filter in memory to avoid needing a composite index
+                const filteredDocs = snap.docs.filter(doc => {
+                    const data = doc.data();
+                    return data.testId === testId && data.status === 'available';
+                });
+
+                if (filteredDocs.length > 0) {
+                    const docs = filteredDocs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    docs.sort((a: any, b: any) => {
+                        const timeA = a.submittedAt ? a.submittedAt.toMillis() : 0;
+                        const timeB = b.submittedAt ? b.submittedAt.toMillis() : 0;
+                        return timeB - timeA;
+                    });
+
                     setIsReady(true);
-                    const docId = snap.docs[0].id;
+                    const docId = docs[0].id;
                     // Auto-redirect after 2s
                     setTimeout(() => {
                         router.push(`/test-series/${testId}/result?ref=${docId}`);

@@ -30,17 +30,25 @@ export default function PostListing({ title }: { title: string }) {
                 setLoading(true);
                 const q = query(
                     collection(db, 'articles'),
-                    where('status', '==', 'Published'),
-                    orderBy('createdAt', 'desc')
+                    where('status', '==', 'Published')
                 );
                 const snap = await getDocs(q);
-                const data = snap.docs.map(d => ({
+                let data = snap.docs.map(d => ({
                     id: d.id,
                     ...d.data(),
+                    createdAt: d.data().createdAt,
                     date: d.data().createdAt
                         ? new Date(d.data().createdAt.toDate()).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
                         : '',
-                })) as Post[];
+                })) as (Post & { createdAt?: any })[];
+
+                // Sort by createdAt descending in memory to avoid composite index requirement
+                data.sort((a, b) => {
+                    const timeA = a.createdAt?.toMillis?.() || 0;
+                    const timeB = b.createdAt?.toMillis?.() || 0;
+                    return timeB - timeA;
+                });
+
                 setPosts(data);
             } catch (err) {
                 console.error('Error fetching articles:', err);
