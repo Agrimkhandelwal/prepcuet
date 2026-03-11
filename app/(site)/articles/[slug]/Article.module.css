@@ -184,8 +184,8 @@
     line-height: 1.9;
     color: var(--text-main);
     font-family: 'Merriweather', 'Georgia', serif;
-    overflow-wrap: break-word;
-    word-break: break-word;
+    overflow-wrap: normal;
+    word-break: normal;
 }
 
 .contentBody h1,
